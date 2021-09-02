@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:value="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="${'/style.css'}" href="../static/style.css">
+    <title>Rockstar Tickets</title>
+</head>
+
+<body>
+
+<br>
+
+<div class="container">
+    <img class="logo" src="../images/logo4.jpg" alt="logo">
+    <br>
+    <div th:replace="fragments :: menuBar"></div>
+    <div class="row align-items-start">
+
+        <div class="row row-col-3">
+            <div class="col flexiflex-to-align">
+                <div class="card" th:each="concert : ${concertList}">
+                    <div class="card-body">
+                        <div class="image-wrapper">
+                            <img th:src="@{${'../images/' + concert.id + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" class="images">
+                            <!--  <img src="'../static/images/' + ${concert.id} + '.jpg'" width="150" heigth="200"-->
+                            <!--class="card-img-top" alt="...">-->
+                        </div>
+                        <h5 class="card-title" th:text="${concert.artist + ' den ' + concert.date}">Concert: The Iliad</h5>
+                        <p class="card-text location" th:text="${'På ' + concert.arena.arenaName + ' i ' + concert.arena.city}">Arena: Fjällräven Arena</p>
+                        <p class="concertDescriptionShort" th:text="${concert.concertDescription}" ></p>
+                        <div class="buttonPriceWrapper">
+                            <a th:href="'/event?eventId=' + ${concert.id}" class="btn btn-warning">Mer information</a>
+                            <div class="card-text price" th:text="${concert.ticketPrice + ' kr '}">Pris: 550</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
